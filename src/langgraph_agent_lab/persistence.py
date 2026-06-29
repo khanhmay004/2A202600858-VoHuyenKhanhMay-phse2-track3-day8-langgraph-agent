@@ -8,13 +8,10 @@ from typing import Any
 def build_checkpointer(kind: str = "memory", database_url: str | None = None) -> Any | None:
     """Return a LangGraph checkpointer.
 
-    TODO(student): implement SQLite support for the persistence extension track.
-    The starter provides MemorySaver only — SQLite/Postgres are extension tasks.
-
-    For SQLite:
-    - pip install langgraph-checkpoint-sqlite
-    - Use SqliteSaver with sqlite3.connect() and WAL mode
-    - See: https://langchain-ai.github.io/langgraph/how-tos/persistence/
+    - "none"     -> no persistence
+    - "memory"   -> in-process MemorySaver (default; fresh each run)
+    - "sqlite"   -> durable SqliteSaver (survives process restart -> crash-resume)
+    - "postgres" -> optional extension (not implemented)
     """
     if kind == "none":
         return None
@@ -23,10 +20,14 @@ def build_checkpointer(kind: str = "memory", database_url: str | None = None) ->
 
         return MemorySaver()
     if kind == "sqlite":
-        raise NotImplementedError(
-            "TODO(student): implement SQLite checkpointer. "
-            "Hint: pip install langgraph-checkpoint-sqlite, then use SqliteSaver"
-        )
+        import sqlite3
+
+        from langgraph.checkpoint.sqlite import SqliteSaver
+
+        db_path = database_url or "checkpoints.db"
+        conn = sqlite3.connect(db_path, check_same_thread=False)
+        conn.execute("PRAGMA journal_mode=WAL;")  # more durable across processes/crashes
+        return SqliteSaver(conn=conn)
     if kind == "postgres":
         raise NotImplementedError(
             "TODO(student): implement Postgres checkpointer (optional extension)"
