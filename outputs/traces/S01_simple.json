@@ -1,0 +1,44 @@
+{
+  "scenario_id": "S01_simple",
+  "expected_route": "simple",
+  "actual_route": "simple",
+  "final_answer": "Hello! To reset your password, please visit the login page and click on the \"Forgot Password?\" link. Follow the prompts to receive a password reset email. If you need further assistance, feel free to reach out. Have a great day!",
+  "events": [
+    {
+      "node": "intake",
+      "event_type": "completed",
+      "message": "query normalized",
+      "latency_ms": 0,
+      "metadata": {}
+    },
+    {
+      "node": "classify",
+      "event_type": "completed",
+      "message": "route=simple",
+      "latency_ms": 0,
+      "metadata": {
+        "route": "simple",
+        "reasoning": "The request is a general how-to question about resetting a password.",
+        "latency_ms": 9407
+      }
+    },
+    {
+      "node": "answer",
+      "event_type": "completed",
+      "message": "generated grounded answer",
+      "latency_ms": 0,
+      "metadata": {
+        "latency_ms": 1643
+      }
+    },
+    {
+      "node": "finalize",
+      "event_type": "completed",
+      "message": "workflow finished",
+      "latency_ms": 0,
+      "metadata": {
+        "route": "simple"
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "scenario_id": "S07_dead_letter",
+  "expected_route": "error",
+  "actual_route": "error",
+  "final_answer": "We could not complete your request after 1 attempt(s). It has been escalated to a human engineer (dead-letter queue).",
+  "events": [
+    {
+      "node": "intake",
+      "event_type": "completed",
+      "message": "query normalized",
+      "latency_ms": 0,
+      "metadata": {}
+    },
+    {
+      "node": "classify",
+      "event_type": "completed",
+      "message": "route=error",
+      "latency_ms": 0,
+      "metadata": {
+        "route": "error",
+        "reasoning": "The ticket describes a system failure that the user cannot recover from.",
+        "latency_ms": 1030
+      }
+    },
+    {
+      "node": "retry",
+      "event_type": "retry",
+      "message": "attempt 1",
+      "latency_ms": 0,
+      "metadata": {
+        "attempt": 1
+      }
+    },
+    {
+      "node": "dead_letter",
+      "event_type": "completed",
+      "message": "escalated to dead-letter queue",
+      "latency_ms": 0,
+      "metadata": {
+        "attempt": 1
+      }
+    },
+    {
+      "node": "finalize",
+      "event_type": "completed",
+      "message": "workflow finished",
+      "latency_ms": 0,
+      "metadata": {
+        "route": "error"
+      }
+    }
+  ]
+}

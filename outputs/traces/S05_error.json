@@ -1,0 +1,94 @@
+{
+  "scenario_id": "S05_error",
+  "expected_route": "error",
+  "actual_route": "error",
+  "final_answer": "Hello! \n\nThank you for your patience. It seems there was a transient tool failure while processing your request, which caused the timeout. We recommend trying again, as these issues are often resolved quickly. If you continue to experience problems, please let us know, and we’ll be happy to assist further.\n\nBest regards!",
+  "events": [
+    {
+      "node": "intake",
+      "event_type": "completed",
+      "message": "query normalized",
+      "latency_ms": 0,
+      "metadata": {}
+    },
+    {
+      "node": "classify",
+      "event_type": "completed",
+      "message": "route=error",
+      "latency_ms": 0,
+      "metadata": {
+        "route": "error",
+        "reasoning": "The ticket describes a system failure or outage.",
+        "latency_ms": 165182
+      }
+    },
+    {
+      "node": "retry",
+      "event_type": "retry",
+      "message": "attempt 1",
+      "latency_ms": 0,
+      "metadata": {
+        "attempt": 1
+      }
+    },
+    {
+      "node": "tool",
+      "event_type": "error",
+      "message": "ERROR: transient tool failure (attempt=1)",
+      "latency_ms": 0,
+      "metadata": {
+        "attempt": 1
+      }
+    },
+    {
+      "node": "evaluate",
+      "event_type": "completed",
+      "message": "eval=needs_retry",
+      "latency_ms": 0,
+      "metadata": {}
+    },
+    {
+      "node": "retry",
+      "event_type": "retry",
+      "message": "attempt 2",
+      "latency_ms": 0,
+      "metadata": {
+        "attempt": 2
+      }
+    },
+    {
+      "node": "tool",
+      "event_type": "completed",
+      "message": "TOOL_OK: retrieved data for query 'Timeout failure while processing request'",
+      "latency_ms": 0,
+      "metadata": {
+        "attempt": 2
+      }
+    },
+    {
+      "node": "evaluate",
+      "event_type": "completed",
+      "message": "eval=success",
+      "latency_ms": 0,
+      "metadata": {}
+    },
+    {
+      "node": "answer",
+      "event_type": "completed",
+      "message": "generated grounded answer",
+      "latency_ms": 0,
+      "metadata": {
+        "latency_ms": 2160
+      }
+    },
+    {
+      "node": "finalize",
+      "event_type": "completed",
+      "message": "workflow finished",
+      "latency_ms": 0,
+      "metadata": {
+        "route": "error"
+      }
+    }
+  ]
+}

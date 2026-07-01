@@ -1,0 +1,60 @@
+{
+  "scenario_id": "S02_tool",
+  "expected_route": "tool",
+  "actual_route": "tool",
+  "final_answer": "Thank you for your inquiry! I was able to retrieve the status for your order. If you have any further questions or need assistance, feel free to ask!",
+  "events": [
+    {
+      "node": "intake",
+      "event_type": "completed",
+      "message": "query normalized",
+      "latency_ms": 0,
+      "metadata": {}
+    },
+    {
+      "node": "classify",
+      "event_type": "completed",
+      "message": "route=tool",
+      "latency_ms": 0,
+      "metadata": {
+        "route": "tool",
+        "reasoning": "The request is for an information lookup regarding the status of an order.",
+        "latency_ms": 2819
+      }
+    },
+    {
+      "node": "tool",
+      "event_type": "completed",
+      "message": "TOOL_OK: retrieved data for query 'Please lookup order status for order 123'",
+      "latency_ms": 0,
+      "metadata": {
+        "attempt": 0
+      }
+    },
+    {
+      "node": "evaluate",
+      "event_type": "completed",
+      "message": "eval=success",
+      "latency_ms": 0,
+      "metadata": {}
+    },
+    {
+      "node": "answer",
+      "event_type": "completed",
+      "message": "generated grounded answer",
+      "latency_ms": 0,
+      "metadata": {
+        "latency_ms": 1234
+      }
+    },
+    {
+      "node": "finalize",
+      "event_type": "completed",
+      "message": "workflow finished",
+      "latency_ms": 0,
+      "metadata": {
+        "route": "tool"
+      }
+    }
+  ]
+}

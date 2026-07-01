@@ -1,0 +1,42 @@
+{
+  "scenario_id": "S03_missing",
+  "expected_route": "missing_info",
+  "actual_route": "missing_info",
+  "final_answer": "Could you share more details? Your request \"Can you fix it?\" is missing specifics - please tell me which order, account, or item is involved and the outcome you expect.",
+  "events": [
+    {
+      "node": "intake",
+      "event_type": "completed",
+      "message": "query normalized",
+      "latency_ms": 0,
+      "metadata": {}
+    },
+    {
+      "node": "classify",
+      "event_type": "completed",
+      "message": "route=missing_info",
+      "latency_ms": 0,
+      "metadata": {
+        "route": "missing_info",
+        "reasoning": "The request is vague and lacks specific details about what needs to be fixed.",
+        "latency_ms": 3646
+      }
+    },
+    {
+      "node": "clarify",
+      "event_type": "completed",
+      "message": "asked clarification question",
+      "latency_ms": 0,
+      "metadata": {}
+    },
+    {
+      "node": "finalize",
+      "event_type": "completed",
+      "message": "workflow finished",
+      "latency_ms": 0,
+      "metadata": {
+        "route": "missing_info"
+      }
+    }
+  ]
+}

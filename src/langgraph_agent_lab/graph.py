@@ -12,7 +12,7 @@ from typing import Any
 from .state import AgentState
 
 
-def build_graph(checkpointer: Any | None = None) -> Any:
+def build_graph(checkpointer: Any | None = None) -> Any:  # noqa: ANN401 (langgraph types kept loose for import-safety)
     """Build and compile the support-ticket StateGraph.
 
     START -> intake -> classify -> [route_after_classify]

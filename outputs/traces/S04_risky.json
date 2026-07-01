@@ -1,0 +1,76 @@
+{
+  "scenario_id": "S04_risky",
+  "expected_route": "risky",
+  "actual_route": "risky",
+  "final_answer": "Hello,\n\nThank you for your request. I’m happy to inform you that the refund has been processed successfully. You will receive a confirmation email shortly.\n\nIf you have any further questions or need assistance, feel free to reach out!\n\nBest regards,  \n[Your Name]  \nCustomer Support",
+  "events": [
+    {
+      "node": "intake",
+      "event_type": "completed",
+      "message": "query normalized",
+      "latency_ms": 0,
+      "metadata": {}
+    },
+    {
+      "node": "classify",
+      "event_type": "completed",
+      "message": "route=risky",
+      "latency_ms": 0,
+      "metadata": {
+        "route": "risky",
+        "reasoning": "The request involves processing a refund and sending a confirmation email, both of which have side effects.",
+        "latency_ms": 893
+      }
+    },
+    {
+      "node": "risky_action",
+      "event_type": "completed",
+      "message": "prepared risky action for approval",
+      "latency_ms": 0,
+      "metadata": {}
+    },
+    {
+      "node": "approval",
+      "event_type": "interrupt",
+      "message": "human approval step",
+      "latency_ms": 0,
+      "metadata": {
+        "approved": true
+      }
+    },
+    {
+      "node": "tool",
+      "event_type": "completed",
+      "message": "TOOL_OK: retrieved data for query 'Refund this customer and send confirmati'",
+      "latency_ms": 0,
+      "metadata": {
+        "attempt": 0
+      }
+    },
+    {
+      "node": "evaluate",
+      "event_type": "completed",
+      "message": "eval=success",
+      "latency_ms": 0,
+      "metadata": {}
+    },
+    {
+      "node": "answer",
+      "event_type": "completed",
+      "message": "generated grounded answer",
+      "latency_ms": 0,
+      "metadata": {
+        "latency_ms": 1866
+      }
+    },
+    {
+      "node": "finalize",
+      "event_type": "completed",
+      "message": "workflow finished",
+      "latency_ms": 0,
+      "metadata": {
+        "route": "risky"
+      }
+    }
+  ]
+}
